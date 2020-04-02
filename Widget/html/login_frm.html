@@ -38,7 +38,7 @@
         </ul>
     </section>
     <section class="aui-content-padded">
-        <div class="aui-btn aui-btn-block aui-btn-info aui-btn-sm" tapmode onclick="register1()">注册</div>
+        <div class="aui-btn aui-btn-block aui-btn-info aui-btn-sm" tapmode onclick="insert()">注册</div>
     </section>
     <section class="aui-content-padded">
         <div class="aui-btn aui-btn-block aui-btn-info aui-btn-sm" tapmode onclick="login()">登录</div>
@@ -138,7 +138,7 @@ function insert(){
   model.insert
   model.insert({
       class: 'user1',
-      value: {userId:'33333',password:'22222'}
+      value: {userId:'12345',password:'12345'}
   },function(ret,err){
     if( ret ){
            alert( JSON.stringify( ret ) );
