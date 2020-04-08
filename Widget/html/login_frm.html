@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
     <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
-    <title>Hello APP</title>
+    <title>登录</title>
     <link rel="stylesheet" type="text/css" href="../css/aui.css" />
 	<style>
         .login-third {
@@ -38,10 +38,10 @@
         </ul>
     </section>
     <section class="aui-content-padded">
-        <div class="aui-btn aui-btn-block aui-btn-info aui-btn-sm" tapmode onclick="insert()">注册</div>
+        <div class="aui-btn aui-btn-block aui-btn-info aui-btn-sm" tapmode onclick="register()">注册</div>
     </section>
     <section class="aui-content-padded">
-        <div class="aui-btn aui-btn-block aui-btn-info aui-btn-sm" tapmode onclick="login()">登录</div>
+        <div class="aui-btn aui-btn-block aui-btn-info aui-btn-sm" tapmode onclick="insert()">登录</div>
     </section>
 </body>
 <script type="text/javascript" src="../script/api.js"></script>
@@ -138,7 +138,7 @@ function insert(){
   model.insert
   model.insert({
       class: 'user1',
-      value: {userId:'12345',password:'12345'}
+      value: {userId:'2345',password:'111'}
   },function(ret,err){
     if( ret ){
            alert( JSON.stringify( ret ) );
