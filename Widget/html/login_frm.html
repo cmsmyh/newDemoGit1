@@ -38,10 +38,10 @@
         </ul>
     </section>
     <section class="aui-content-padded">
-        <div class="aui-btn aui-btn-block aui-btn-info aui-btn-sm" tapmode onclick="register()">注册</div>
+        <div class="aui-btn aui-btn-block aui-btn-info aui-btn-sm" tapmode onclick="reg()">注册</div>
     </section>
     <section class="aui-content-padded">
-        <div class="aui-btn aui-btn-block aui-btn-info aui-btn-sm" tapmode onclick="insert()">登录</div>
+        <div class="aui-btn aui-btn-block aui-btn-info aui-btn-sm" tapmode onclick="login()">登录</div>
     </section>
 </body>
 <script type="text/javascript" src="../script/api.js"></script>
@@ -63,53 +63,28 @@ model.config({
     var headerPos = $api.offset(header);
     var body_h = $api.offset($api.dom('body')).h;
 };
+
 //注册-可行
-function register(){
-  var model=api.require('model');
-  var value1=document.getElementById('code1').value;
-  var value2=document.getElementById('code2').value;
-  api.showProgress();
+function reg(){
+ var model = api.require("model");
+ model.config({
+  appKey: '075A132B-2B11-505D-F01E-FA8B51604C1B',
+  appId: 'A6036872544676',
+    host: 'https://d.apicloud.com'
+ });
+  var userId=document.getElementById('code1').value;
+  var password=document.getElementById('code2').value;
   model.insert({
-  class:'user1',
-  value:{
-    userId:value1,
-    password:value2
-  }
-  },function(ret,err){
-    api.hideProgress();
-    if(ret){
-      api.alert({
-          title: '注册成功',
-          buttons:['确定'],
-      }, function(ret, err){
-          if( ret.buttonIndex==1 ){
-              api.closeWin();
-          }
-      });
-
-    }else{
-      api.toast({msg:err.message,location: "middle"})
-    }
-  });
-
-}
-
-//注册1
-function register1(){
-  var user=api.require('user');
-  var value1=document.getElementById('code1').value;
-  var value2=document.getElementById('code2').value;
-  user.register({
     class:'user1',
     value:{
-      userId:value1,
-      password:value2
+      userId:userId,
+      password:password
     }
   },function(ret,err){
     if(ret){
-       alert( JSON.stringify( ret ) );
+    alert("注册成功")
     }else{
-       alert( JSON.stringify( err ) );
+    alert("出错了")
     }
   });
 }
@@ -150,7 +125,7 @@ function insert(){
 }
 
 //登录
-function login(){
+function login1(){
   var user=api.require('user');
   var value1=document.getElementById('code1').value;
   var value2=document.getElementById('code2').value;
@@ -165,6 +140,46 @@ function login(){
     }
   });
 }
+
+
+//登录
+function login(){
+    var userId=document.getElementById('code1').value;
+    var password=document.getElementById('code2').value;
+  var model = api.require('model');
+  var query = api.require('query');
+  model.config({
+   appId : 'A6036872544676',
+   appKey : '075A132B-2B11-505D-F01E-FA8B51604C1B',
+   host : 'https://d.apicloud.com'
+  });
+  query.createQuery(function(ret, err) {
+   if (ret && ret.qid) {
+    query.whereEqual({
+     qid : ret.qid,
+     column : 'userId',
+     value : userId
+    });
+    query.whereEqual({
+     qid : ret.qid,
+     column : 'password',
+     value : password
+    });
+    model.findAll({
+     class : 'user1',
+     qid : ret.qid
+    },function(ret, err) {
+          if(ret){
+              alert("登录失败")
+          }
+          else{
+            alert("用户名或密码错误")
+          }
+    });
+   }
+  });
+}
+
 
 function closeWin(){
     api.closeWin({
