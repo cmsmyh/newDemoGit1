@@ -53,8 +53,7 @@
         </li>
       </ul>
     </div>
-    <div class = "music_list">
-      <!--歌单-->
+    <!-- <div class = "music_list">
 		  <div>
           <input class="aui-list-item-title" id="865854699" onclick="selectMusic0()" type="button" value="朋友请听好(易烊千玺版) --易烊千玺">
 		  </div>
@@ -64,7 +63,7 @@
 		  <div>
           <input class="aui-list-item-title" id="440073029" onclick="selectMusic2()" type="button" value="新世界(live)  --华晨宇">
 		  </div>
-		</div>
+		</div> -->
 
 </body>
 <script type="text/javascript">
@@ -73,7 +72,7 @@
     url = unescape(url);
     var name_or_singer = url.substring(url.lastIndexOf('=')+1, url.length);
     var demo;
-    var json = {
+    /*var json = {
         ttf: "widget://res/UKIJTor.ttf",
         downmusicBtn: false,
         fenxiangBtn: true,
@@ -81,7 +80,7 @@
         nameTextSize: 20,
         singerTextSize: 16,
         isShowUi: false
-    }
+    }*/
 
     var inpArr = document.getElementsByTagName('input');
 
@@ -114,12 +113,13 @@
                   gedan = ret[i].name+"--"+ret[i].singer;
                   inpArr[i].value=gedan;
 
-                  var arr = [];
+                  //var arr = [];
                   var na = "'"+ret[i].name+"'";
                   var url = "'http://music.163.com/song/media/outer/url?id="+ret[i].music_id+".mp3'"
                   var ot=i+1;
                   var si = "'"+ret[i].singer+"'";
-                  var music = {
+                  addMusic(na,url,si,ot);
+                  /*var music = {
                       name:na,
                       filename:url,
                       singer:si,
@@ -129,9 +129,9 @@
                       downmusicSum: 12,
                       pinglunSum: 45,
                       background: "http://7xwc0t.com1.z0.glb.clouddn.com/apicloud/3a3d926564ab4c5b2292744d5ffb0ec6.jpg"
-                  };
-                  arr.push(music);
-                  json["music"] = arr;
+                  }*/;
+                  //arr.push(music);
+                  //json["music"] = arr;
 
                 }
               }else{
@@ -180,6 +180,25 @@
             alert("getCurrentPlayer|" + JSON.stringify(ret));
         });
     }
+
+    //添加音乐
+    function addMusic(na,fn,ser,oth) {
+       demo.addMusic({
+           data: {
+               name: na,
+               filename: fn,
+               singer: ser,
+               icon: "http://p1.music.126.net/CjOOps_aDbNVz0JpWyfB5Q==/109951163027939634.jpg?param=130y130",
+               other: oth,
+               fenxiangSum: 3,
+               downmusicSum: 33,
+               pinglunSum: 44,
+               background: "http://7xwc0t.com1.z0.glb.clouddn.com/apicloud/3a3d926564ab4c5b2292744d5ffb0ec6.jpg"
+           }
+       }, function(ret, err) {
+           alert("addMusic|" + JSON.stringify(ret));
+       });
+   }
 
     function selectMusic0() {
         netplay();
@@ -274,8 +293,26 @@
     //var musics={'name':'ret[n]name','filename':'url','singer':'ret[n].singer','icon':'http://p1.music.126.net/6F8-Rp8MUvxzrpTjxJiA7A==/109951164764756625.jpg?param=130y130','other':n,fenxiangSum: 43,downmusicSum: 12,pinglunSum: 45,background: "http://7xwc0t.com1.z0.glb.clouddn.com/apicloud/3a3d926564ab4c5b2292744d5ffb0ec6.jpg"}
 
     function netplay() {
-        var url = "http://music.163.com/song/media/outer/url?id=1426883824.mp3"
-        demo.playMusic(json, function(ret, err) {});
+        demo.playMusic({
+            musics: [{
+                name: "小苹果1(http://)",
+                filename: "http://7xwc0t.com1.z0.glb.clouddn.com/apicloud/619a3762a2be7650c4345c1d7c23575e.mp3",
+                singer: "筷子兄弟",
+                icon: "http://7xwc0t.com1.z0.glb.clouddn.com/apicloud/3a3d926564ab4c5b2292744d5ffb0ec6.jpg",
+                other: 11,
+                fenxiangSum: 43,
+                downmusicSum: 12,
+                pinglunSum: 45,
+                background: "http://7xwc0t.com1.z0.glb.clouddn.com/apicloud/3a3d926564ab4c5b2292744d5ffb0ec6.jpg"
+            }],
+            ttf: "widget://res/UKIJTor.ttf",
+            downmusicBtn: false,
+            fenxiangBtn: true,
+            pinglunBtn: true,
+            nameTextSize: 20,
+            singerTextSize: 16,
+            isShowUi: false
+        }, function(ret, err) {});
     }
 
     function show() {
