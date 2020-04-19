@@ -5,10 +5,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
     <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
-    <!--<link rel="stylesheet" type="text/css" href="../css/api.css" />-->
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
     <script type="text/javascript" src="../script/api.js"></script>
     <style type="text/css">
-        html,body {
+    html,body {
             width:100%;
             height: 100%;
         }
@@ -19,41 +19,64 @@
             margin: 0;
         }
 
+        .music_list {
+            font-size: 150%;
+            width:100%;
+        }
 		    .aui-list-item-title{
       			font-size: 100%;
       			border:none;
       			background-color: white;
 		    }
-
-        .music_list {
-            font-size: 100%;
-            width:100%;
-        }
-       .aui-list-item-title{
-         font-size: 100%;
-         border:none;
-         background-color: white;
-      }
     </style>
+
 </head>
 <body>
     <div class = 'music_list'>
-      <ul id="aui-list aui-list-noborder">
+      <ul class="aui-list aui-list-noborder">
         <li class="aui-list-item">
           <div class="aui-list-item-inner">
-            <input id="in" type="button" onclick="selectMusic0()"/><br>
-            <input id="in" type="button" onclick="selectMusic1()"/><br>
-            <input id="in" type="button" onclick="selectMusic2()"/><br>
-            <input id="in" type="button" onclick="selectMusic3()"/><br>
-            <input id="in" type="button" onclick="selectMusic4()"/><br>
-            <input id="in" type="button" onclick="selectMusic5()"/><br>
-            <!--<input class="aui-list-item-title" id="5189652" onclick="selectMusic1()" type="button" value="Menuet D major --Wolfgang Amadeu">-->
-            <button onclick="search()">赋值</button>
+            <input class="aui-list-item-title" id="in1" type="button" onclick="selectMusic0()" style="display:none"/>
+          </div>
+        </li>
+      </ul>
+      <ul class="aui-list aui-list-noborder">
+        <li class="aui-list-item">
+          <div class="aui-list-item-inner">
+            <input class="aui-list-item-title" id="in2" type="button" onclick="selectMusic1()" style="display:none"/>
+          </div>
+        </li>
+      </ul>
+      <ul class="aui-list aui-list-noborder">
+        <li class="aui-list-item">
+          <div class="aui-list-item-inner">
+            <input class="aui-list-item-title" id="in3" type="button" onclick="selectMusic2()" style="display:none"/>
+          </div>
+        </li>
+      </ul>
+      <ul class="aui-list aui-list-noborder">
+        <li class="aui-list-item">
+          <div class="aui-list-item-inner">
+            <input class="aui-list-item-title" id="in4" type="button" onclick="selectMusic3()" style="display:none"/>
+          </div>
+        </li>
+      </ul>
+      <ul class="aui-list aui-list-noborder">
+        <li class="aui-list-item">
+          <div class="aui-list-item-inner">
+            <input class="aui-list-item-title" id="in5" type="button" onclick="selectMusic4()" style="display:none"/>
+          </div>
+        </li>
+      </ul>
+      <ul class="aui-list aui-list-noborder">
+        <li class="aui-list-item">
+          <div class="aui-list-item-inner">
+            <input class="aui-list-item-title" id="in6" type="button" onclick="selectMusic5()" style="display:none"/>
           </div>
         </li>
       </ul>
     </div>
-
+    <button onclick="search()">赋值</button>
 </body>
 <script type="text/javascript">
     //获取主页面搜索框传递来的数据
@@ -63,6 +86,8 @@
     var demo;
     var inpArr = document.getElementsByTagName('input');
 
+    var musics=[];
+    //var i = 0;  //记录搜索产生的歌曲数
 
     function search(){
         var value=name_or_singer;
@@ -85,17 +110,26 @@
              qid: ret.qid
             },function(ret,err){
               if(ret){
-                alert(JSON.stringify( ret ));
                 for(var i=0;i<ret.length;i++){
                   gedan = ret[i].name+"--"+ret[i].singer;
                   inpArr[i].value=gedan;
+                  id = inpArr[i].id;
+                  $("#"+id+"").show();
 
                   //var arr = [];
-                  var na = '"'+ret[i].name+'"';
-                  var url = '"http://music.163.com/song/media/outer/url?id='+ret[i].music_id+'.mp3"';
+                  var na = ret[i].name;
+                  var url = "http://music.163.com/song/media/outer/url?id="+ret[i].music_id+".mp3";
+                  var si = ret[i].singer;
                   var ot=i+1;
-                  var si = '"'+ret[i].singer+'"';
+
                   addMusic(na,url,si,ot);
+                  var music = [];
+                  music.push(na);
+                  music.push(url);
+                  music.push(ot);
+                  music.push(si);
+                  musics.push(music);
+
                 }
               }else{
                 alert("曲库中没有此歌曲");
@@ -104,6 +138,7 @@
           }
         });
     }
+
     //window.onload = search;
     //根据歌手名搜索
     function search1(){
@@ -138,6 +173,12 @@
     }
     //window.onload = search1;
 
+    //页面自动刷新函数
+    //function myrefresh()
+    //{
+       //window.location.reload();
+    //}
+
     function getCurrentPlayer() {
         demo.getCurrentPlayer(function(ret, err) {
             alert("getCurrentPlayer|" + JSON.stringify(ret));
@@ -146,7 +187,7 @@
 
 
     //添加音乐
-    function addMusic(na,fn,ser,oth) {
+    function {
        demo.addMusic({
            data: {
                name: na,
@@ -159,34 +200,66 @@
                pinglunSum: 44,
                background: "http://7xwc0t.com1.z0.glb.clouddn.com/apicloud/3a3d926564ab4c5b2292744d5ffb0ec6.jpg"
            }
-       }, function(ret, err) {
-           alert("addMusic|" + JSON.stringify(ret));
        });
    }
 
     function selectMusic0() {
+        var i = 0;
+        var name1 = document.getElementById("in1").value;
+        name = name1.match(/(\S*)--/)[1];
+        for(var j=0;j<musics.length;j++){
+          if(name = musics[j][0]){
+            i = j;
+          }
+        }
+        i = i + 1;
         demo.selectMusic({
-            other:1
-        }, function(ret, err) {
-            alert("selectMusic|" + JSON.stringify(ret));
+            other:i
         });
         show();
     }
 
     function selectMusic1() {
-        demo.selectMusic({
-            other:2
-        }, function(ret, err) {
-            alert("selectMusic|" + JSON.stringify(ret));
-        });
-        show();
+      var i = 0;
+      var name1 = document.getElementById("in2").value;
+      name = name1.match(/(\S*)--/)[1];
+      for(var j=0;j<musics.length;j++){
+        if(name = musics[j][0]){
+          i = j;
+        }
+      }
+      i = i + 1;
+      demo.selectMusic({
+          other:i
+      });
+      show();
+        /*var i = 1
+        demo.playMusic({
+            musics: [{
+                name: musics[i][0],
+                filename: musics[i][1],
+                singer: musics[i][2],
+                icon: "http://7xwc0t.com1.z0.glb.clouddn.com/apicloud/3a3d926564ab4c5b2292744d5ffb0ec6.jpg",
+                other:musics[i][3],
+                fenxiangSum: 43,
+                downmusicSum: 12,
+                pinglunSum: 45,
+                background: "http://7xwc0t.com1.z0.glb.clouddn.com/apicloud/3a3d926564ab4c5b2292744d5ffb0ec6.jpg"
+            }],
+            ttf: "widget://res/UKIJTor.ttf",
+            downmusicBtn: false,
+            fenxiangBtn: true,
+            pinglunBtn: true,
+            nameTextSize: 20,
+            singerTextSize: 16,
+            isShowUi: false
+        }, function(ret, err) {});*/
+
     }
 
     function selectMusic2() {
         demo.selectMusic({
             other:3
-        }, function(ret, err) {
-            alert("selectMusic|" + JSON.stringify(ret));
         });
         show();
     }
@@ -194,8 +267,6 @@
     function selectMusic3() {
         demo.selectMusic({
             other:4
-        }, function(ret, err) {
-            alert("selectMusic|" + JSON.stringify(ret));
         });
         show();
     }
@@ -203,8 +274,6 @@
     function selectMusic4() {
         demo.selectMusic({
             other:5
-        }, function(ret, err) {
-            alert("selectMusic|" + JSON.stringify(ret));
         });
         show();
     }
@@ -212,8 +281,6 @@
     function selectMusic5() {
         demo.selectMusic({
             other:6
-        }, function(ret, err) {
-            alert("selectMusic|" + JSON.stringify(ret));
         });
         show();
     }
@@ -221,8 +288,6 @@
     function selectMusic6() {
         demo.selectMusic({
             other:7
-        }, function(ret, err) {
-            alert("selectMusic|" + JSON.stringify(ret));
         });
         show();
     }
@@ -230,8 +295,6 @@
     function selectMusic7() {
         demo.selectMusic({
             other:8
-        }, function(ret, err) {
-            alert("selectMusic|" + JSON.stringify(ret));
         });
         show();
     }
@@ -239,8 +302,6 @@
     function selectMusic8() {
         demo.selectMusic({
             other:9
-        }, function(ret, err) {
-            alert("selectMusic|" + JSON.stringify(ret));
         });
         show();
     }
@@ -248,8 +309,6 @@
     function selectMusic9() {
         demo.selectMusic({
             other:10
-        }, function(ret, err) {
-            alert("selectMusic|" + JSON.stringify(ret));
         });
         show();
     }
@@ -258,7 +317,17 @@
 
     function netplay() {
         demo.playMusic({
-            musics: [],
+            musics: [{
+                name: "小苹果1(http://)",
+                filename: "http://7xwc0t.com1.z0.glb.clouddn.com/apicloud/619a3762a2be7650c4345c1d7c23575e.mp3",
+                singer: "筷子兄弟",
+                icon: "http://7xwc0t.com1.z0.glb.clouddn.com/apicloud/3a3d926564ab4c5b2292744d5ffb0ec6.jpg",
+                other: 1,
+                fenxiangSum: 43,
+                downmusicSum: 12,
+                pinglunSum: 45,
+                background: "http://7xwc0t.com1.z0.glb.clouddn.com/apicloud/3a3d926564ab4c5b2292744d5ffb0ec6.jpg"
+            }],
             ttf: "widget://res/UKIJTor.ttf",
             downmusicBtn: false,
             fenxiangBtn: true,
@@ -273,57 +342,23 @@
         demo.showUI();
     }
 
-    function close() {
-        demo.closeUI();
-    }
-
-    function stop() {
-        demo.stopMusic();
-    }
-
-    function musicPrevious() {
-        netplay();
-        demo.musicPrevious();
-    }
-
-
-    function musicPlayPause() {
-        netplay();
-        demo.musicPlayPause();
-    }
-
-    function musicNext() {
-        netplay();
-        demo.musicNext();
-    }
-
     function apiready() {
         demo = api.require('uimusic');
         demo.addEventListener({
             name: "closeui"
-        }, function(ret, err) {
-            alert("closeui>>addEventListener|" + JSON.stringify(ret));
         });
         demo.addEventListener({
             name: "pinglun"
-        }, function(ret, err) {
-            alert("pinglun>>addEventListener|" + JSON.stringify(ret));
         });
         demo.addEventListener({
             name: "fenxiang"
-        }, function(ret, err) {
-            alert("fenxiang>>addEventListener|" + JSON.stringify(ret));
         });
         demo.addEventListener({
             name: "downmusic"
-        }, function(ret, err) {
-            alert("downmusic>>addEventListener|" + JSON.stringify(ret));
         });
 
         demo.addEventListener({
             name: "sharetop"
-        }, function(ret, err) {
-            alert("sharetop>>addEventListener|" + JSON.stringify(ret));
         });
     }
 </script>
