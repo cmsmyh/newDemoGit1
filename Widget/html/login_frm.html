@@ -169,8 +169,9 @@ function login(){
      class : 'user1',
      qid : ret.qid
     },function(ret, err) {
-          if(ret){
-              alert("登录失败")
+          if(ret.length>0){
+            alert("登陆成功")
+              window.location.href = 'frame3_frm.html?name='+userId;
           }
           else{
             alert("用户名或密码错误")

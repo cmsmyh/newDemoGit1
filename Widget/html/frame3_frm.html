@@ -25,7 +25,7 @@
                         <img src="../image/demo1.png" class="aui-img-round" >
                     </div>
                     <div class="aui-list-item-inner aui-list-item-arrow">
-                        <div class="aui-list-item-text text-white aui-font-size-18">38dd4ef6d</div>
+                        <div class="aui-list-item-text text-white aui-font-size-18" id="user"></div>
                         <div class="aui-list-item-text text-white">
                            <div><i class="aui-iconfont aui-icon-mobile aui-font-size-14"></i>152****0989</div>
                         </div>
@@ -36,16 +36,36 @@
     </section>
     <section class="aui-content aui-grid aui-margin-b-15">
         <div class="aui-row">
-          <div class="aui-col-xs-4">
-              <div class="aui-gird-lable aui-font-size-10">最近播放</div>
-          </div>
-            <div class="aui-col-xs-4">
-                <div class="aui-gird-lable aui-font-size-10">本地歌曲</div>
-            </div>
             <div class="aui-col-xs-4">
                 <div class="aui-gird-lable aui-font-size-10" onclick="window.location.href='login_frm.html'">设置</div>
             </div>
         </div>
     </section>
+    <section class="aui-content" id="classify-list">
+        <ul class="aui-list aui-list-noborder">
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-title" onclick="jump()">我喜欢的歌手</div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-title">我的收藏</div>
+                </div>
+            </li>
+        </ul>
+    </section>
 </body>
 </html>
+<script type="text/javascript" src="../script/api.js" ></script>
+<script type="text/javascript">
+var url=location.search;
+var loc=url.substring(url.lastIndexOf('=')+1,url.length);
+localStorage.setItem('userId',loc);
+// alert(loc);
+document.getElementById('user').innerHTML=loc;
+function jump(){
+  url = "singer_frm.html?name="+loc;
+    location.href=url;
+}
+</script>

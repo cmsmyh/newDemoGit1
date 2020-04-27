@@ -5,6 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
     <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
     <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
     <script type="text/javascript" src="../script/api.js"></script>
     <style type="text/css">
@@ -32,6 +34,12 @@
 
 </head>
 <body>
+  <header class="aui-bar aui-bar-nav" id="aui-header">
+      <a class="aui-btn aui-pull-left" tapmode onclick="window.location.href='frame2_frm.html'">
+          <span class="aui-iconfont aui-icon-left"></span>
+      </a>
+      <div class="aui-title">返回</div>
+  </header>
     <div class = 'music_list'>
       <ul class="aui-list aui-list-noborder">
         <li class="aui-list-item">
@@ -76,20 +84,20 @@
         </li>
       </ul>
     </div>
-    <button onclick="search()">赋值</button>
+    <button onclick="search();search1();">赋值</button>
 </body>
 <script type="text/javascript">
     //获取主页面搜索框传递来的数据
     var url = location.search;
-    url = unescape(url);
-    var name_or_singer = url.substring(url.lastIndexOf('=')+1, url.length);
+    var loc = url.substring(url.lastIndexOf('=')+1, url.length);
+    var name_or_singer = unescape(loc); //
+
+
     var demo;
     var inpArr = document.getElementsByTagName('input');
 
-    var musics=[];
-    //var i = 0;  //记录搜索产生的歌曲数
 
-    function search(){
+    function search(){  //用来对div进行赋值
         var value=name_or_singer;
         var query=api.require('query');
         var model=api.require('model');
@@ -115,21 +123,6 @@
                   inpArr[i].value=gedan;
                   id = inpArr[i].id;
                   $("#"+id+"").show();
-
-                  //var arr = [];
-                  var na = ret[i].name;
-                  var url = "http://music.163.com/song/media/outer/url?id="+ret[i].music_id+".mp3";
-                  var si = ret[i].singer;
-                  var ot=i+1;
-
-                  addMusic(na,url,si,ot);
-                  var music = [];
-                  music.push(na);
-                  music.push(url);
-                  music.push(ot);
-                  music.push(si);
-                  musics.push(music);
-
                 }
               }else{
                 alert("曲库中没有此歌曲");
@@ -139,8 +132,6 @@
         });
     }
 
-    //window.onload = search;
-    //根据歌手名搜索
     function search1(){
        var value = name_or_singer;
        var query = api.require('query');
@@ -152,7 +143,6 @@
           });
           query.createQuery(function(ret,err){
         if(ret && ret.qid){
-         //console.log(ret.qid)
          query.whereLike({
            qid:ret.qid,
            value:value,
@@ -171,90 +161,30 @@
         }
       });
     }
-    //window.onload = search1;
 
-    //页面自动刷新函数
-    //function myrefresh()
-    //{
-       //window.location.reload();
-    //}
-
-    function getCurrentPlayer() {
-        demo.getCurrentPlayer(function(ret, err) {
-            alert("getCurrentPlayer|" + JSON.stringify(ret));
-        });
-    }
-
-
-    //添加音乐
-    function {
-       demo.addMusic({
-           data: {
-               name: na,
-               filename: fn,
-               singer: ser,
-               icon: "http://p1.music.126.net/CjOOps_aDbNVz0JpWyfB5Q==/109951163027939634.jpg?param=130y130",
-               other: oth,
-               fenxiangSum: 3,
-               downmusicSum: 33,
-               pinglunSum: 44,
-               background: "http://7xwc0t.com1.z0.glb.clouddn.com/apicloud/3a3d926564ab4c5b2292744d5ffb0ec6.jpg"
-           }
-       });
-   }
 
     function selectMusic0() {
-        var i = 0;
-        var name1 = document.getElementById("in1").value;
-        name = name1.match(/(\S*)--/)[1];
-        for(var j=0;j<musics.length;j++){
-          if(name = musics[j][0]){
-            i = j;
+        var name = document.getElementById("in1").value;
+        for(var i=1;i<=localStorage.length;i++){
+          if(name==localStorage.getItem(i)){
+            demo.selectMusic({
+                other:i
+            });
+            show();
           }
         }
-        i = i + 1;
-        demo.selectMusic({
-            other:i
-        });
-        show();
     }
 
     function selectMusic1() {
-      var i = 0;
-      var name1 = document.getElementById("in2").value;
-      name = name1.match(/(\S*)--/)[1];
-      for(var j=0;j<musics.length;j++){
-        if(name = musics[j][0]){
-          i = j;
+      var name = document.getElementById("in2").value;
+      for(var i=1;i<=localStorage.length;i++){
+        if(name==localStorage.getItem(i)){
+          demo.selectMusic({
+              other:i
+          });
+          show();
         }
       }
-      i = i + 1;
-      demo.selectMusic({
-          other:i
-      });
-      show();
-        /*var i = 1
-        demo.playMusic({
-            musics: [{
-                name: musics[i][0],
-                filename: musics[i][1],
-                singer: musics[i][2],
-                icon: "http://7xwc0t.com1.z0.glb.clouddn.com/apicloud/3a3d926564ab4c5b2292744d5ffb0ec6.jpg",
-                other:musics[i][3],
-                fenxiangSum: 43,
-                downmusicSum: 12,
-                pinglunSum: 45,
-                background: "http://7xwc0t.com1.z0.glb.clouddn.com/apicloud/3a3d926564ab4c5b2292744d5ffb0ec6.jpg"
-            }],
-            ttf: "widget://res/UKIJTor.ttf",
-            downmusicBtn: false,
-            fenxiangBtn: true,
-            pinglunBtn: true,
-            nameTextSize: 20,
-            singerTextSize: 16,
-            isShowUi: false
-        }, function(ret, err) {});*/
-
     }
 
     function selectMusic2() {
@@ -312,22 +242,10 @@
         });
         show();
     }
-    //url = "http://music.163.com/song/media/outer/url?id="+ret[n].music_id+".mp3"
-    //var musics={'name':'ret[n]name','filename':'url','singer':'ret[n].singer','icon':'http://p1.music.126.net/6F8-Rp8MUvxzrpTjxJiA7A==/109951164764756625.jpg?param=130y130','other':n,fenxiangSum: 43,downmusicSum: 12,pinglunSum: 45,background: "http://7xwc0t.com1.z0.glb.clouddn.com/apicloud/3a3d926564ab4c5b2292744d5ffb0ec6.jpg"}
 
     function netplay() {
         demo.playMusic({
-            musics: [{
-                name: "小苹果1(http://)",
-                filename: "http://7xwc0t.com1.z0.glb.clouddn.com/apicloud/619a3762a2be7650c4345c1d7c23575e.mp3",
-                singer: "筷子兄弟",
-                icon: "http://7xwc0t.com1.z0.glb.clouddn.com/apicloud/3a3d926564ab4c5b2292744d5ffb0ec6.jpg",
-                other: 1,
-                fenxiangSum: 43,
-                downmusicSum: 12,
-                pinglunSum: 45,
-                background: "http://7xwc0t.com1.z0.glb.clouddn.com/apicloud/3a3d926564ab4c5b2292744d5ffb0ec6.jpg"
-            }],
+            musics: [],
             ttf: "widget://res/UKIJTor.ttf",
             downmusicBtn: false,
             fenxiangBtn: true,

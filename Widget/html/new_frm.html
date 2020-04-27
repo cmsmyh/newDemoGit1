@@ -93,60 +93,70 @@
           <li class="aui-list-item">
             <div class="aui-list-item-inner">
           <input class="aui-list-item-title" id="1437165631" onclick="selectMusic1()" type="button" value="Fight as ONE  --陈奕迅 / 蔡依林">
+            <button onclick="fun(this.id)" id="1437165631">收藏</button>
 		  </div>
     </li>
     <ul class="aui-list aui-list-noborder">
         <li class="aui-list-item">
 		  <div class="aui-list-item-inner">
-          <input class="aui-list-item-title" id="1437165631" onclick="selectMusic2()" type="button" value=" 放肆爱 --陈翔">
+          <input class="aui-list-item-title" id="1436530624" onclick="selectMusic2()" type="button" value=" 放肆爱 --陈翔">
+            <button onclick="fun(this.id)" id="1436530624">收藏</button>
 		  </div>
     </li>
     <ul class="aui-list aui-list-noborder">
         <li class="aui-list-item">
           <div class="aui-list-item-inner">
           <input class="aui-list-item-title" id="1436753138" onclick="selectMusic3()" type="button" value=" Take Yourself Home  --Troye Sivan">
+            <button onclick="fun(this.id)" id="1436753138">收藏</button>
 		  </div>
     </li>
     <ul class="aui-list aui-list-noborder">
         <li class="aui-list-item">
           <div class="aui-list-item-inner">
           <input class="aui-list-item-title" id="1436940462" onclick="selectMusic4()" type="button" value="꽃 (flower)  --Code Kunst">
+            <button onclick="fun(this.id)" id="1436940462">收藏</button>
 		  </div>
     </li>
     <ul class="aui-list aui-list-noborder">
         <li class="aui-list-item">
           <div class="aui-list-item-inner">
           <input class="aui-list-item-title" id="1436078279" onclick="selectMusic5()" type="button" value="收爱   --董力">
+            <button onclick="fun(this.id)" id="1436078279">收藏</button>
 		  </div>
     </li>
     <ul class="aui-list aui-list-noborder">
         <li class="aui-list-item">
           <div class="aui-list-item-inner">
           <input class="aui-list-item-title" id="1436150979" onclick="selectMusic6()" type="button" value="爱若琉璃  --周深">
+            <button onclick="fun(this.id)" id="1436150979">收藏</button>
 		  </div>
     </li>
     <ul class="aui-list aui-list-noborder">
         <li class="aui-list-item">
           <div class="aui-list-item-inner">
           <input class="aui-list-item-title" id="1436054819" onclick="selectMusic7()" type="button" value="Monica  --钟楚曦">
+            <button onclick="fun(this.id)" id="1436054819">收藏</button>
 		  </div>
     </li>
     <ul class="aui-list aui-list-noborder">
         <li class="aui-list-item">
           <div class="aui-list-item-inner">
           <input class="aui-list-item-title" id="1434404711" onclick="selectMusic8()" type="button" value="爱未央  --鞠婧祎">
+            <button onclick="fun(this.id)" id="1434404711">收藏</button>
 		  </div>
     </li>
     <ul class="aui-list aui-list-noborder">
         <li class="aui-list-item">
           <div class="aui-list-item-inner">
           <input class="aui-list-item-title" id="1434057050" onclick="selectMusic9()" type="button" value="你的色彩   --Super Vocal">
+            <button onclick="fun(this.id)" id="1434057050">收藏</button>
 		  </div>
     </li>
     <ul class="aui-list aui-list-noborder">
         <li class="aui-list-item">
           <div class="aui-list-item-inner">
           <input class="aui-list-item-title" id="51435423453" onclick="selectMusic10()" type="button" value="아프다 --Various KUSH">
+            <button onclick="fun(this.id)" id="51435423453">收藏</button>
 		  </div>
       </li>
 		</div>
@@ -441,3 +451,26 @@
 </script>
 
 </html>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript">
+// var url=location.search;
+// var loc=url.substring(url.lastIndexOf('=')+1,url.length);
+var loc=localStorage.getItem('userId');
+//插入-可行
+function fun(id){
+  var myid = id;
+  var model=api.require('model');
+  model.insert
+  model.insert({
+      class: 'like',
+      value: {userId:loc,music_id:myid}
+  },function(ret,err){
+    if( ret ){
+           alert( JSON.stringify( ret ) );
+      }else{
+           alert( JSON.stringify( err ) );
+      }
+  });
+
+}
+</script>

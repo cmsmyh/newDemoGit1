@@ -89,60 +89,70 @@
           <li class="aui-list-item">
             <div class="aui-list-item-inner">
           <input class="aui-list-item-title" id="32102855" onclick="selectMusic1()" type="button" value="Last Reunion --Peter Roe">
+            <button onclick="fun(this.id)" id="32102855">收藏</button>
 		  </div>
     </li>
     <ul class="aui-list aui-list-noborder">
         <li class="aui-list-item">
           <div class="aui-list-item-inner">
           <input class="aui-list-item-title" id="3932159" onclick="selectMusic2()" type="button" value="You --Approaching Nirvana">
+            <button onclick="fun(this.id)" id="3932159">收藏</button>
 		  </div>
     </li>
     <ul class="aui-list aui-list-noborder">
         <li class="aui-list-item">
           <div class="aui-list-item-inner">
           <input class="aui-list-item-title" id="857896" onclick="selectMusic3()" type="button" value="A Little Story  --Valentin">
+            <button onclick="fun(this.id)" id="857896">收藏</button>
 		  </div>
     </li>
     <ul class="aui-list aui-list-noborder">
         <li class="aui-list-item">
           <div class="aui-list-item-inner">
           <input class="aui-list-item-title" id="4017240" onclick="selectMusic4()" type="button" value="Intro  --Dreamtale">
+            <button onclick="fun(this.id)" id="4017240">收藏</button>
 		  </div>
     </li>
     <ul class="aui-list aui-list-noborder">
         <li class="aui-list-item">
           <div class="aui-list-item-inner">
           <input class="aui-list-item-title" id="2061452" onclick="selectMusic5()" type="button" value="The Right Path  --Thomas Greenberg">
+            <button onclick="fun(this.id)" id="2061452">收藏</button>
 		  </div>
     </li>
     <ul class="aui-list aui-list-noborder">
         <li class="aui-list-item">
           <div class="aui-list-item-inner">
           <input class="aui-list-item-title" id="480353" onclick="selectMusic6()" type="button" value="いつも何度でも  --宗次郎">
+            <button onclick="fun(this.id)" id="480353">收藏</button>
 		  </div>
     </li>
     <ul class="aui-list aui-list-noborder">
         <li class="aui-list-item">
           <div class="aui-list-item-inner">
           <input class="aui-list-item-title" id="402073046" onclick="selectMusic7()" type="button" value="Last Reunion  --EpicMusicVn">
+            <button onclick="fun(this.id)" id="402073046">收藏</button>
 		  </div>
     </li>
     <ul class="aui-list aui-list-noborder">
         <li class="aui-list-item">
           <div class="aui-list-item-inner">
           <input class="aui-list-item-title" id="586299" onclick="selectMusic8()" type="button" value="風の住む街  --磯村由紀子">
+            <button onclick="fun(this.id)" id="586299">收藏</button>
 		  </div>
     </li>
     <ul class="aui-list aui-list-noborder">
         <li class="aui-list-item">
           <div class="aui-list-item-inner">
           <input class="aui-list-item-title" id="32166628" onclick="selectMusic9()" type="button" value="Summertime  --K-391">
+            <button onclick="fun(this.id)" id="32166628">收藏</button>
 		  </div>
     </li>
     <ul class="aui-list aui-list-noborder">
         <li class="aui-list-item">
           <div class="aui-list-item-inner">
           <input class="aui-list-item-title" id="3935139" onclick="selectMusic10()" type="button" value="Breath and Life --Audiomachine">
+            <button onclick="fun(this.id)" id="3935139">收藏</button>
 		  </div>
     </li>
 		</div>
@@ -260,8 +270,8 @@
             other:10
         }, function(ret, err) {
             alert("selectMusic|" + JSON.stringify(ret));
-        });
-    }
+          });
+      }
 
     function netplay() {
         var url = "http://music.163.com/song/media/outer/url?id=32102855.mp3"
@@ -437,3 +447,26 @@
 </script>
 
 </html>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript">
+// var url=location.search;
+// var loc=url.substring(url.lastIndexOf('=')+1,url.length);
+var loc=localStorage.getItem('userId');
+//插入-可行
+function fun(id){
+  var myid = id;
+  var model=api.require('model');
+  model.insert
+  model.insert({
+      class: 'like',
+      value: {userId:loc,music_id:myid}
+  },function(ret,err){
+    if( ret ){
+           alert( JSON.stringify( ret ) );
+      }else{
+           alert( JSON.stringify( err ) );
+      }
+  });
+
+}
+</script>
