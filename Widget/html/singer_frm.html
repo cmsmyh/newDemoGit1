@@ -56,3 +56,15 @@ function insert(){
 }
 </script>
 </html>
+<script type="text/javascript" src="../script/api.js" ></script>
+<script type="text/javascript">
+var url=location.search;
+var loc=url.substring(url.lastIndexOf('=')+1,url.length);
+localStorage.setItem('userId',loc);
+// alert(loc);
+document.getElementById('user').innerHTML=loc;
+function jump(){
+  url = "singer_frm.html?name="+loc;
+    location.href=url;
+}
+</script>

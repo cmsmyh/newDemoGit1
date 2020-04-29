@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
     <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
-    <title>首页</title>
+    <title>我的</title>
     <link rel="stylesheet" type="text/css" href="../css/aui.css" />
     <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
     <script type="text/javascript" src="../script/api.js"></script>
@@ -36,11 +36,15 @@
         .aui-grid [class*=aui-col-] {
             padding: 0.75rem 0;
         }
+
     </style>
 </head>
 <body>
   <header class="aui-bar aui-bar-nav" id="aui-header">
-      <div class="aui-title">播放过的歌曲</div>
+      <a class="aui-btn aui-pull-left" tapmode onclick="jump()">
+          <span class="aui-iconfont aui-icon-left"></span>
+      </a>
+      <div class="aui-title">我的收藏</div>
   </header>
   <div class = 'music_list'>
     <ul class="aui-list aui-list-noborder">
@@ -123,8 +127,14 @@
     var demo;
     var j = 0;
 
+    function jump(){
+      url = "frame3_frm.html?name="+loc;
+        location.href=url;
+    }
+
     function search1(music_id){
       //var userId = "42";
+      //alert(music_id);
       var query = api.require('query');
       var model = api.require('model');
          model.config({
@@ -158,8 +168,7 @@
                  var url = "http://music.163.com/song/media/outer/url?id="+ret[0].music_id+".mp3";
                  var ser = ret[0].singer;
                  var oth = j;
-
-                 addMusic(na,url,ser,oth)
+                    addMusic(na,url,ser,oth);
                }
              }
              else{
@@ -171,8 +180,8 @@
     }
 
     function search(){
-      //  var userId = "42";
-       var loc=localStorage.getItem('userId');
+      //  var userId = "42";//localStorage.getItem("userId")"";
+        var loc=localStorage.getItem('userId');
        var query = api.require('query');
        var model = api.require('model');
           model.config({
@@ -189,7 +198,7 @@
            column:'userId'
          });
          model.findAll({
-          class: 'recent',
+          class: 'like',
           qid: ret.qid
          },function(ret,err){
            if(ret.length>0){
@@ -198,7 +207,7 @@
                search1(music_id);
              }
            }else{
-              alert("你没有最近播放的歌曲");
+              alert("你没有收藏的歌曲");
            }
          });
         }

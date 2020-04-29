@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Module Develop</title>
+    <title>搜索歌单</title>
     <meta charset="utf-8">
     <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
     <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
@@ -20,6 +20,7 @@
             background-color: #fff;
             margin: 0;
         }
+
 
         .music_list {
             font-size: 150%;
@@ -44,45 +45,69 @@
       <ul class="aui-list aui-list-noborder">
         <li class="aui-list-item">
           <div class="aui-list-item-inner">
-            <input class="aui-list-item-title" id="in1" type="button" onclick="selectMusic0()" style="display:none"/>
+            <input class="aui-list-item-title" id="in1" type="button" onclick="selectMusic0()">
           </div>
         </li>
-      </ul>
       <ul class="aui-list aui-list-noborder">
         <li class="aui-list-item">
           <div class="aui-list-item-inner">
             <input class="aui-list-item-title" id="in2" type="button" onclick="selectMusic1()" style="display:none"/>
           </div>
         </li>
-      </ul>
       <ul class="aui-list aui-list-noborder">
         <li class="aui-list-item">
           <div class="aui-list-item-inner">
             <input class="aui-list-item-title" id="in3" type="button" onclick="selectMusic2()" style="display:none"/>
           </div>
         </li>
-      </ul>
       <ul class="aui-list aui-list-noborder">
         <li class="aui-list-item">
           <div class="aui-list-item-inner">
             <input class="aui-list-item-title" id="in4" type="button" onclick="selectMusic3()" style="display:none"/>
           </div>
         </li>
-      </ul>
       <ul class="aui-list aui-list-noborder">
         <li class="aui-list-item">
           <div class="aui-list-item-inner">
             <input class="aui-list-item-title" id="in5" type="button" onclick="selectMusic4()" style="display:none"/>
           </div>
         </li>
-      </ul>
       <ul class="aui-list aui-list-noborder">
         <li class="aui-list-item">
           <div class="aui-list-item-inner">
             <input class="aui-list-item-title" id="in6" type="button" onclick="selectMusic5()" style="display:none"/>
           </div>
         </li>
-      </ul>
+        <ul class="aui-list aui-list-noborder">
+          <li class="aui-list-item">
+            <div class="aui-list-item-inner">
+              <input class="aui-list-item-title" id="in6" type="button" onclick="selectMusic5()" style="display:none"/>
+            </div>
+          </li>
+          <ul class="aui-list aui-list-noborder">
+            <li class="aui-list-item">
+              <div class="aui-list-item-inner">
+                <input class="aui-list-item-title" id="in7" type="button" onclick="selectMusic5()" style="display:none"/>
+              </div>
+            </li>
+            <ul class="aui-list aui-list-noborder">
+              <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                  <input class="aui-list-item-title" id="in8" type="button" onclick="selectMusic5()" style="display:none"/>
+                </div>
+              </li>
+              <ul class="aui-list aui-list-noborder">
+                <li class="aui-list-item">
+                  <div class="aui-list-item-inner">
+                    <input class="aui-list-item-title" id="in9" type="button" onclick="selectMusic5()" style="display:none"/>
+                  </div>
+                </li>
+                <ul class="aui-list aui-list-noborder">
+                  <li class="aui-list-item">
+                    <div class="aui-list-item-inner">
+                      <input class="aui-list-item-title" id="in10" type="button" onclick="selectMusic5()" style="display:none"/>
+                    </div>
+                  </li>
     </div>
     <button onclick="search();search1();">赋值</button>
 </body>
@@ -153,7 +178,12 @@
           qid: ret.qid
          },function(ret,err){
            if(ret){
-             alert(JSON.stringify( ret ))
+             for(var i=0;i<ret.length;i++){
+               gedan = ret[i].name+"--"+ret[i].singer;
+               inpArr[i].value=gedan;
+               id = inpArr[i].id;
+               $("#"+id+"").show();
+             }
            }else{
               alert("曲库中没有此歌手的歌曲");
            }

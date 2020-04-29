@@ -8,8 +8,6 @@
     <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
     <link rel="stylesheet" type="text/css" href="../css/aui.css" />
     <style type="text/css">
-    /*.aui-list .aui-list-item-media {
-        width: 6rem;*/
     }
 
         html,body {
@@ -92,70 +90,70 @@
     <ul class="aui-list aui-list-noborder">
         <li class="aui-list-item">
           <div class="aui-list-item-inner">
-          <input class="aui-list-item-title" id="5189652" onclick="selectMusic1()" type="button" value="Menuet D major --Wolfgang Amadeu">
+          <input class="aui-list-item-title" id="5189652" onclick="fun1(this.id);selectMusic1();" type="button" value="Menuet D major --Wolfgang Amadeu">
             <button onclick="fun(this.id)" id="5189652">收藏</button>
 		  </div>
     </li>
     <ul class="aui-list aui-list-noborder">
         <li class="aui-list-item">
           <div class="aui-list-item-inner">
-          <input class="aui-list-item-title" id="5276791" onclick="selectMusic2()" type="button" value="小夜曲 --Franz Schubert">
+          <input class="aui-list-item-title" id="5276791" onclick="fun1(this.id);selectMusic2();" type="button" value="小夜曲 --Franz Schubert">
             <button onclick="fun(this.id)" id="5276791">收藏</button>
 		  </div>
     </li>
     <ul class="aui-list aui-list-noborder">
         <li class="aui-list-item">
           <div class="aui-list-item-inner">
-          <input class="aui-list-item-title" id="5276811" onclick="selectMusic3()" type="button" value="蓝色多瑙河  --Johann Strauss II">
+          <input class="aui-list-item-title" id="5276811" onclick="fun1(this.id);selectMusic3();" type="button" value="蓝色多瑙河  --Johann Strauss II">
             <button onclick="fun(this.id)" id="5276811">收藏</button>
 		  </div>
     </li>
     <ul class="aui-list aui-list-noborder">
         <li class="aui-list-item">
           <div class="aui-list-item-inner">
-          <input class="aui-list-item-title" id="20744788" onclick="selectMusic4()" type="button" value="With An Orchid  --Yanni">
+          <input class="aui-list-item-title" id="20744788" onclick="fun1(this.id);selectMusic4();" type="button" value="With An Orchid  --Yanni">
             <button onclick="fun(this.id)" id="20744788">收藏</button>
 		  </div>
     </li>
     <ul class="aui-list aui-list-noborder">
         <li class="aui-list-item">
           <div class="aui-list-item-inner">
-          <input class="aui-list-item-title" id="5276808" onclick="selectMusic5()" type="button" value="月光奏鸣曲  --Ludwig van Beethoven">
+          <input class="aui-list-item-title" id="5276808" onclick="fun1(this.id);selectMusic5();" type="button" value="月光奏鸣曲  --Ludwig van Beethoven">
             <button onclick="fun(this.id)" id="5276808">收藏</button>
 		  </div>
     </li>
     <ul class="aui-list aui-list-noborder">
         <li class="aui-list-item">
           <div class="aui-list-item-inner">
-          <input class="aui-list-item-title" id="34516407" onclick="selectMusic6()" type="button" value="诙谐曲  --Antonín Dvořák">
+          <input class="aui-list-item-title" id="34516407" onclick="fun1(this.id);selectMusic6();" type="button" value="诙谐曲  --Antonín Dvořák">
             <button onclick="fun(this.id)" id="34516407">收藏</button>
 		  </div>
     </li>
     <ul class="aui-list aui-list-noborder">
         <li class="aui-list-item">
           <div class="aui-list-item-inner">
-          <input class="aui-list-item-title" id="5276814" onclick="selectMusic7()" type="button" value="爱之梦  --Franz Liszt">
+          <input class="aui-list-item-title" id="5276814" onclick="fun1(this.id);selectMusic7();" type="button" value="爱之梦  --Franz Liszt">
             <button onclick="fun(this.id)" id="5276814">收藏</button>
 		  </div>
     </li>
     <ul class="aui-list aui-list-noborder">
         <li class="aui-list-item">
           <div class="aui-list-item-inner">
-          <input class="aui-list-item-title" id="34341360" onclick="selectMusic8()" type="button" value="梦中的婚礼  --Richard Clayderman">
+          <input class="aui-list-item-title" id="34341360" onclick="fun1(this.id);selectMusic8();" type="button" value="梦中的婚礼  --Richard Clayderman">
             <button onclick="fun(this.id)" id="34341360">收藏</button>
 		  </div>
     </li>
     <ul class="aui-list aui-list-noborder">
         <li class="aui-list-item">
           <div class="aui-list-item-inner">
-          <input class="aui-list-item-title" id="1091088" onclick="selectMusic9()" type="button" value="canon in d  --Brian Crain">
+          <input class="aui-list-item-title" id="1091088" onclick="fun1(this.id);selectMusic9();" type="button" value="canon in d  --Brian Crain">
             <button onclick="fun(this.id)" id="1091088">收藏</button>
 		  </div>
     </li>
     <ul class="aui-list aui-list-noborder">
         <li class="aui-list-item">
           <div class="aui-list-item-inner">
-          <input class="aui-list-item-title" id="5160802" onclick="selectMusic10()" type="button" value="寻羊冒险记 --Various Artists">
+          <input class="aui-list-item-title" id="5160802" onclick="fun1(this.id);selectMusic10();" type="button" value="寻羊冒险记 --Various Artists">
             <button onclick="fun(this.id)" id="5160802">收藏</button>
 		  </div>
     </li>
@@ -463,6 +461,22 @@ function fun(id){
   model.insert
   model.insert({
       class: 'like',
+      value: {userId:loc,music_id:myid}
+  },function(ret,err){
+    if( ret ){
+           alert( JSON.stringify( ret ) );
+      }else{
+           alert( JSON.stringify( err ) );
+      }
+  });
+
+}
+function fun1(id){
+  var myid = id;
+  var model=api.require('model');
+  model.insert
+  model.insert({
+      class: 'recent',
       value: {userId:loc,music_id:myid}
   },function(ret,err){
     if( ret ){
