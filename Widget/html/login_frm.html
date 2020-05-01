@@ -171,6 +171,7 @@ function login(){
     },function(ret, err) {
           if(ret.length>0){
             alert("登陆成功")
+            localStorage.getItem("userId",userId);
               window.location.href = 'frame3_frm.html?name='+userId;
           }
           else{

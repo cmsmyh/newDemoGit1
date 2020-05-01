@@ -37,7 +37,12 @@
     <section class="aui-content aui-grid aui-margin-b-15">
         <div class="aui-row">
             <div class="aui-col-xs-4">
-                <div class="aui-gird-lable aui-font-size-10" onclick="window.location.href='login_frm.html'">设置</div>
+                <div class="aui-gird-lable aui-font-size-10" onclick="window.location.href='login_frm.html'">注册登录</div>
+            </div>
+        </div>
+        <div class="aui-row">
+            <div class="aui-col-xs-4">
+                <div class="aui-gird-lable aui-font-size-10" onclick="login1()">退出登录</div>
             </div>
         </div>
     </section>
@@ -59,6 +64,12 @@
 </html>
 <script type="text/javascript" src="../script/api.js" ></script>
 <script type="text/javascript">
+//退出登录
+function login1(){
+  localStorage.clear();
+  document.getElementById('user').innerHTML="";
+}
+
 var url=location.search;
 var loc=url.substring(url.lastIndexOf('=')+1,url.length);
 localStorage.setItem('userId',loc);

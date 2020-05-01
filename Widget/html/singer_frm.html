@@ -60,10 +60,10 @@ function insert(){
 <script type="text/javascript">
 var url=location.search;
 var loc=url.substring(url.lastIndexOf('=')+1,url.length);
-localStorage.setItem('userId',loc);
-// alert(loc);
-document.getElementById('user').innerHTML=loc;
+// localStorage.setItem('userId',loc);
+// document.getElementById('user').innerHTML=loc;
 function jump(){
+  var loc=localStorage.getItem('userId');
   url = "frame3_frm.html?name="+loc;
     location.href=url;
 }
