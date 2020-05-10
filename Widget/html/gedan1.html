@@ -115,7 +115,7 @@
     //获取主页面搜索框传递来的数据
     var url = location.search;
     var loc = url.substring(url.lastIndexOf('=')+1, url.length);
-    var name_or_singer = unescape(loc); //
+    var name_or_singer = unescape(loc);
 
 
     var demo;
@@ -141,7 +141,7 @@
              class: 'music',
              qid: ret.qid
             },function(ret,err){
-              if(ret){
+              if(ret.length>0){
                 for(var i=0;i<ret.length;i++){
                   gedan = ret[i].name+"--"+ret[i].singer;
                   inpArr[i].value=gedan;
@@ -176,7 +176,7 @@
           class: 'music',
           qid: ret.qid
          },function(ret,err){
-           if(ret){
+           if(ret.length>0){
              for(var i=0;i<ret.length;i++){
                gedan = ret[i].name+"--"+ret[i].singer;
                inpArr[i].value=gedan;
@@ -217,59 +217,102 @@
     }
 
     function selectMusic2() {
-        demo.selectMusic({
-            other:3
-        });
-        show();
+      var name = document.getElementById("in3").value;
+      for(var i=1;i<=localStorage.length;i++){
+        if(name==localStorage.getItem(i)){
+          demo.selectMusic({
+              other:i
+          });
+          show();
+        }
+      }
     }
 
     function selectMusic3() {
-        demo.selectMusic({
-            other:4
-        });
-        show();
+      var name = document.getElementById("in4").value;
+      for(var i=1;i<=localStorage.length;i++){
+        if(name==localStorage.getItem(i)){
+          demo.selectMusic({
+              other:i
+          });
+          show();
+        }
+      }
     }
 
     function selectMusic4() {
         demo.selectMusic({
             other:5
         });
-        show();
+        show();var name = document.getElementById("in5").value;
+        for(var i=1;i<=localStorage.length;i++){
+          if(name==localStorage.getItem(i)){
+            demo.selectMusic({
+                other:i
+            });
+            show();
+          }
+        }
     }
 
     function selectMusic5() {
-        demo.selectMusic({
-            other:6
-        });
-        show();
+      var name = document.getElementById("in6").value;
+      for(var i=1;i<=localStorage.length;i++){
+        if(name==localStorage.getItem(i)){
+          demo.selectMusic({
+              other:i
+          });
+          show();
+        }
+      }
     }
 
     function selectMusic6() {
-        demo.selectMusic({
-            other:7
-        });
-        show();
+      var name = document.getElementById("in7").value;
+      for(var i=1;i<=localStorage.length;i++){
+        if(name==localStorage.getItem(i)){
+          demo.selectMusic({
+              other:i
+          });
+          show();
+        }
+      }
     }
 
     function selectMusic7() {
-        demo.selectMusic({
-            other:8
-        });
-        show();
+      var name = document.getElementById("in8").value;
+      for(var i=1;i<=localStorage.length;i++){
+        if(name==localStorage.getItem(i)){
+          demo.selectMusic({
+              other:i
+          });
+          show();
+        }
+      }
     }
 
     function selectMusic8() {
-        demo.selectMusic({
-            other:9
-        });
-        show();
+      var name = document.getElementById("in9").value;
+      for(var i=1;i<=localStorage.length;i++){
+        if(name==localStorage.getItem(i)){
+          demo.selectMusic({
+              other:i
+          });
+          show();
+        }
+      }
     }
 
     function selectMusic9() {
-        demo.selectMusic({
-            other:10
-        });
-        show();
+      var name = document.getElementById("in10").value;
+      for(var i=1;i<=localStorage.length;i++){
+        if(name==localStorage.getItem(i)){
+          demo.selectMusic({
+              other:i
+          });
+          show();
+        }
+      }
     }
 
     function netplay() {

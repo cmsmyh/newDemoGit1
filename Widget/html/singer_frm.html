@@ -8,7 +8,7 @@
 </head>
 <body>
   <header class="aui-bar aui-bar-nav" id="aui-header">
-      <a class="aui-btn aui-pull-left" tapmode onclick="jump()">
+      <a class="aui-btn aui-pull-left" tapmode onclick="window.location.href='frame3_frm.html'">
           <span class="aui-iconfont aui-icon-left"></span>
       </a>
       <div class="aui-title">我喜欢的歌手</div>
@@ -31,14 +31,9 @@
 </body>
 <script type="text/javascript" src="../script/api.js"></script>
 <script type="text/javascript">
-var url=location.search;
-var loc=url.substring(url.lastIndexOf('=')+1,url.length);
-function jump(){
-  url = "frame3_frm.html?name="+loc;
-    location.href=url;
-}
 //插入-可行
 function insert(){
+  var loc=localStorage.getItem('userId');
   var singer_name=document.getElementById('name').value;
   var model=api.require('model');
   model.insert
@@ -56,15 +51,3 @@ function insert(){
 }
 </script>
 </html>
-<script type="text/javascript" src="../script/api.js" ></script>
-<script type="text/javascript">
-var url=location.search;
-var loc=url.substring(url.lastIndexOf('=')+1,url.length);
-// localStorage.setItem('userId',loc);
-// document.getElementById('user').innerHTML=loc;
-function jump(){
-  var loc=localStorage.getItem('userId');
-  url = "frame3_frm.html?name="+loc;
-    location.href=url;
-}
-</script>

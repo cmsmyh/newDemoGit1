@@ -27,7 +27,7 @@
                     <div class="aui-list-item-inner aui-list-item-arrow">
                         <div class="aui-list-item-text text-white aui-font-size-18" id="user"></div>
                         <div class="aui-list-item-text text-white">
-                           <div><i class="aui-iconfont aui-icon-mobile aui-font-size-14"></i>152****0989</div>
+                           <div><i class="aui-iconfont aui-icon-mobile aui-font-size-14"></i>用户名</div>
                         </div>
                     </div>
                 </div>
@@ -50,7 +50,7 @@
         <ul class="aui-list aui-list-noborder">
             <li class="aui-list-item">
                 <div class="aui-list-item-inner">
-                    <div class="aui-list-item-title" onclick="jump()">我喜欢的歌手</div>
+                    <div class="aui-list-item-title" onclick="window.location.href='singer_frm.html'">我喜欢的歌手</div>
                 </div>
             </li>
             <li class="aui-list-item">
@@ -69,14 +69,6 @@ function login1(){
   localStorage.clear();
   document.getElementById('user').innerHTML="";
 }
-
-var url=location.search;
-var loc=url.substring(url.lastIndexOf('=')+1,url.length);
-localStorage.setItem('userId',loc);
-// alert(loc);
+var loc=localStorage.getItem('userId');
 document.getElementById('user').innerHTML=loc;
-function jump(){
-  url = "singer_frm.html?name="+loc;
-    location.href=url;
-}
 </script>

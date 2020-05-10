@@ -89,59 +89,6 @@ function reg(){
   });
 }
 
-
-//查找
-function search(){
-  var model=api.require('model');
-  model.findById
-  model.findById({
-      class: 'user1',
-      userId: '123'
-  },function(ret,err){
-    if( ret ){
-         alert( JSON.stringify( ret ) );
-    }else{
-         alert( JSON.stringify( err ) );
-    }
-  });
-
-}
-
-//插入-可行
-function insert(){
-  var model=api.require('model');
-  model.insert
-  model.insert({
-      class: 'user1',
-      value: {userId:'2345',password:'111'}
-  },function(ret,err){
-    if( ret ){
-           alert( JSON.stringify( ret ) );
-      }else{
-           alert( JSON.stringify( err ) );
-      }
-  });
-
-}
-
-//登录
-function login1(){
-  var user=api.require('user');
-  var value1=document.getElementById('code1').value;
-  var value2=document.getElementById('code2').value;
-  user.login({
-    userId:value1,
-    password:value2
-  },function(ret,err){
-    if(ret){
-       alert( JSON.stringify( ret ) );
-    }else{
-       alert( JSON.stringify( err ) );
-    }
-  });
-}
-
-
 //登录
 function login(){
     var userId=document.getElementById('code1').value;
@@ -171,8 +118,8 @@ function login(){
     },function(ret, err) {
           if(ret.length>0){
             alert("登陆成功")
-            localStorage.getItem("userId",userId);
-              window.location.href = 'frame3_frm.html?name='+userId;
+            localStorage.setItem("userId",userId);
+              window.location.href = 'frame3_frm.html?name=';
           }
           else{
             alert("用户名或密码错误")
