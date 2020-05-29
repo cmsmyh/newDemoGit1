@@ -82,7 +82,7 @@
 
 <body>
   <header class="aui-bar aui-bar-nav" id="aui-header">
-      <a class="aui-btn aui-pull-left" tapmode onclick="window.location.href='frame1_frm.html'">
+      <a class="aui-btn aui-pull-left" tapmode onclick="window.location.href='frame1_frm.html',stop()">
           <span class="aui-iconfont aui-icon-left"></span>
       </a>
       <div class="aui-title">热歌榜</div>
@@ -181,6 +181,14 @@
 <script>
     var demo;
 
+    /*function reloadPage(){
+        location.reload();
+    }*/
+
+    function stop(){
+        demo.stopMusic();
+    }
+
     function getCurrentPlayer() {
         demo.getCurrentPlayer(function(ret, err) {
             alert("getCurrentPlayer|" + JSON.stringify(ret));
@@ -278,11 +286,10 @@
     }
 
     function netplay() {
-        var url = "http://music.163.com/song/media/outer/url?id=1434062381.mp3"
         demo.playMusic({
             musics: [{
                 name: "达拉崩吧 (Live)",
-                filename: url,
+                filename: "http://music.163.com/song/media/outer/url?id=1434062381.mp3",
                 singer: "周深",
                 icon: "http://p1.music.126.net/CjOOps_aDbNVz0JpWyfB5Q==/109951163027939634.jpg?param=130y130",
                 other: 1,
@@ -292,7 +299,7 @@
                 background: "http://7xwc0t.com1.z0.glb.clouddn.com/apicloud/3a3d926564ab4c5b2292744d5ffb0ec6.jpg"
             }, {
                 name: "与我无关",
-                filename: "http://music.163.com/song/media/outer/url?id=14135858381.mp3",
+                filename: "http://music.163.com/song/media/outer/url?id=1413585838.mp3",
                 singer: "阿冗",
                 icon: "http://p1.music.126.net/CjOOps_aDbNVz0JpWyfB5Q==/109951163027939634.jpg?param=130y130",
                 other: 2,
